@@ -1,5 +1,7 @@
 
-#include "header.h"
+#include "SISortAlgorithms.h"
+
+using namespace SI_Sort;
 
 int main()
 {
@@ -18,7 +20,9 @@ int main()
 
 	cout << endl << endl;
 
-	SI_Sort::SelectionSort(v);
+	//SelectionSort(v);
+	//BubbleSort(v);
+	InsertionSort(v);
 
 	cout << "After :" << endl;
 
