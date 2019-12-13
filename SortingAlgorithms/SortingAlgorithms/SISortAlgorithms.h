@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <vector>
-#include <list>
+#include <queue>
 
 using namespace std;
 
@@ -15,7 +15,9 @@ namespace SI_Sort
 	void SelectionSort(vector<int>& v);
 	void BubbleSort(vector<int>& v);
 	void InsertionSort(vector<int>& v);
-
+	void MergeSort(vector<int>& v);
+	void QuickSort(vector<int>& v);
+	void HeapSort(vector<int>& v);
 }
 
 #endif
