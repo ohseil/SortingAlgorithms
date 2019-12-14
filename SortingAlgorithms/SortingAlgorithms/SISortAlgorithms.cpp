@@ -170,7 +170,66 @@ void SI_Sort::MergeSort(vector<int>& v)
 // # QuickSort
 void SI_Sort::QuickSort(vector<int>& v)
 {
+	queue<int*> q;
+	
+	// index set's index value.
+	int pivot = 0;
+	int left = 1;
+	int right = 2;
 
+	int first[3]; // first array's index set.
+	first[pivot] = 0, first[left] = 0, first[right] = v.size() - 1;
+	
+	q.push(first);
+	
+	while (q.empty() == false)
+	{
+		vector<int> leftArray, rightArray;
+
+		int* indexes = q.front();
+		q.pop();
+
+		// Divide to left array and right array.
+		for (int i = indexes[left]; i <= indexes[right]; i++)
+		{
+			if (v[indexes[pivot]] > v[i])
+				leftArray.push_back(v[i]);
+			else if (v[indexes[pivot]] < v[i])
+				rightArray.push_back(v[i]);
+		}
+
+		// It is for using when changing datas from original array.
+		int pivotData = v[indexes[pivot]];
+
+		// Change datas from original array.
+		for (int i = indexes[left]; i <= indexes[right]; i++)
+		{
+			if (i < indexes[left] + leftArray.size())
+			{
+				v[i] = leftArray[i - indexes[left]];
+			}
+			else if (i == indexes[left] + leftArray.size())
+			{
+				v[i] = pivotData;
+			}
+			else
+			{
+				v[i] = rightArray[i - indexes[left] - leftArray.size() - 1];
+			}
+		}
+
+		// If each array size is less than 1, push array's index set to the queue.
+		if (leftArray.size() > 1)
+		{
+			int leftIndex[3] = { indexes[left], indexes[left], indexes[left] + leftArray.size() - 1 };
+			q.push(leftIndex);
+		}
+		if (rightArray.size() > 1)
+		{
+			int rightIndex[3] = { indexes[right] - rightArray.size() + 1, indexes[right] - rightArray.size() + 1, indexes[right] };
+			q.push(rightIndex);
+		}
+	}
 }
 // ==================================================
 
