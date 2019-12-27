@@ -234,8 +234,79 @@ void SI_Sort::QuickSort(vector<int>& v)
 // ==================================================
 
 // # HeapSort
+void InsertHeap(vector<int>& heap, int data)
+{
+	// Compare to the data of parents again and gain.
+	// If arrive at root index or data is less or equal to the data of parent, finish.
+
+	heap.push_back(data);
+
+	// Inserted data's index = size - 1.
+	int curIndex = heap.size() - 1;
+	while (curIndex != 0)
+	{
+		if (heap[curIndex / 2] < data)
+		{
+			heap[curIndex] = heap[curIndex / 2];
+			heap[curIndex / 2] = data;
+			curIndex = curIndex / 2;
+		}
+		else
+			break;
+	}
+}
+int DeleteHeap(vector<int>& heap, int& heapSize)
+{
+	int returnValue = heap[0];
+	int value = 0;
+	int valueIndex = 0;
+
+	for (int i = heapSize - 1; i >= 0; i--)
+	{
+		if (heap[i] != -1)
+		{
+			value = heap[0] = heap[i];
+			heapSize--;
+			break;
+		}
+	}
+	
+	while (valueIndex * 2 <= heapSize - 1)
+	{
+		if (heap[valueIndex] < heap[valueIndex * 2])
+		{
+			heap[valueIndex] = heap[valueIndex * 2];
+			heap[valueIndex * 2] = value;
+			valueIndex *= 2;
+		}
+		else if (heap[valueIndex] < heap[valueIndex * 2 + 1])
+		{
+			heap[valueIndex] = heap[valueIndex * 2 + 1];
+			heap[valueIndex * 2 + 1] = value;
+			valueIndex = valueIndex * 2 + 1;
+		}
+		else
+			break;
+	}
+
+	return returnValue;
+}
 void SI_Sort::HeapSort(vector<int>& v)
 {
+	// left child index = parent index * 2
+	// right child index = parent index * 2 + 1
+	// parint index = child index / 2
 
+	// make temp heap.
+	vector<int> heap;
+	int heapSize = 0;
+
+	for (int a : v)
+		InsertHeap(heap, a);
+
+	heapSize = heap.size();
+
+	for (int i = heap.size() - 1; i >= 0; i--)
+		v[i] = DeleteHeap(heap, heapSize);
 }
 // ==================================================
