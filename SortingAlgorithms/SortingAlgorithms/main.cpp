@@ -25,8 +25,7 @@ int main()
 	//BubbleSort(v);
 	//InsertionSort(v);
 	//MergeSort(v);
-	//QuickSort(v);
-	HeapSort(v);
+	QuickSort(v);
 
 	cout << "After :" << endl;
 
@@ -34,6 +33,6 @@ int main()
 		cout << i << " ";
 
 	cout << endl << endl;
-
+	
 	return 0;
 }
